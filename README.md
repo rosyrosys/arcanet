@@ -4,7 +4,7 @@
 
 ArcaNet is the companion prototype to the paper
 *"Phrase-Level Combinatorial Generation: A Historically Grounded Alternative
-to End-to-End Generative Music AI"* (submitted to *Computer Music Journal*, 2026).
+to End-to-End Generative Music AI"* (preprint, under peer review, 2026).
 
 It is a deliberate homage to Athanasius Kircher's **Arca Musarithmica** (1650):
 a bank of pre-composed phrases, a neural-style selector over them,
@@ -115,5 +115,5 @@ machine-readable citation is provided in [`CITATION.cff`](CITATION.cff):
 
 ## License
 
-MIT. See [LICENSE](LICENSE). The paper text is © the author and is
-distributed under a separate agreement with *Computer Music Journal*.
+MIT. See [LICENSE](LICENSE). The paper text is © the author and may be
+subject to separate terms upon publication.
