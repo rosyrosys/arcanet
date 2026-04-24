@@ -9,7 +9,6 @@
 </head>
 <body>
 <div class="page">
-
 <header>
   <h1>ArcaNet</h1>
   <p class="sub">A phrase-level combinatorial composer, in homage to Kircher's Arca Musarithmica.</p>
@@ -17,27 +16,23 @@
     <a href="index.html" class="active">Overview</a>
     <a href="samples.html">Audio samples</a>
     <a href="code.html">Code walkthrough</a>
-    <a href="https://github.com/your-github-username/arcanet">GitHub ↗</a>
+    <a href="https://github.com/rosyrosys/arcanet">GitHub ↗</a>
   </nav>
 </header>
-
 <p class="epigraph">
   &ldquo;Out of a few phrases, an almost unbounded number of melodies.&rdquo;
   — after Athanasius Kircher, <em>Musurgia Universalis</em>, 1650
 </p>
-
 <h2>What it is</h2>
 <p>
-  ArcaNet is the reference prototype for a position paper submitted to
-  <em>Computer Music Journal</em> arguing that <strong>phrase-level
-  combinatorial generation</strong> is a more fruitful — and more musically
-  defensible — direction than autoregressive end-to-end neural models for
-  symbolic music. Its smallest generative unit is a <em>phrase</em> (a
-  one- or two-bar figure with a definite harmonic and rhythmic identity),
-  not a token. Every compositional decision is inspectable, reversible,
-  and editable.
+  ArcaNet is the reference prototype for a position paper (currently under
+  peer review) arguing that <strong>phrase-level combinatorial generation</strong>
+  is a more fruitful — and more musically defensible — direction than
+  autoregressive end-to-end neural models for symbolic music. Its smallest
+  generative unit is a <em>phrase</em> (a one- or two-bar figure with a
+  definite harmonic and rhythmic identity), not a token. Every compositional
+  decision is inspectable, reversible, and editable.
 </p>
-
 <h2>Why phrases?</h2>
 <p>
   Token-level autoregressive models optimize a next-event likelihood that
@@ -50,7 +45,6 @@
   constraint layer that enforces common-practice harmonic grammar and
   stepwise voice leading.
 </p>
-
 <h2>What's in the box</h2>
 <p>
   <span class="pill">~550 LOC</span>
@@ -61,44 +55,4 @@
 <p>
   The core <code>arcanet.py</code> uses only the Python standard library.
   It ships with a phrase bank, a softmax-with-temperature selector, a
-  grammar/voice-leading constraint layer, and a raw-bytes Standard MIDI
-  File writer. The full selection trace (top-3 candidates per slot with
-  probabilities) is emitted to a human-readable log at every run.
-</p>
-
-<h2>Run it</h2>
-<pre><code>git clone https://github.com/your-github-username/arcanet.git
-cd arcanet
-python arcanet.py</code></pre>
-<p>
-  With the default seed (<code>2026</code>) the command produces three
-  deterministic MIDI files, a selection trace, and a statistics JSON.
-  The outputs are byte-identical across runs so the paper's claims can
-  be verified mechanically.
-</p>
-
-<h2>Listen first</h2>
-<p>
-  You can hear the three default compositions on the
-  <a href="samples.html">audio samples page</a> — they are rendered
-  with a tiny additive-synthesis piano voice so no soundfont is required.
-  For a faithful rendering, open the MIDI files in any DAW with a real
-  piano instrument.
-</p>
-
-<h2>Read the paper</h2>
-<p>
-  The paper itself is under review at <em>Computer Music Journal</em>.
-  A preprint will be linked here once a decision is returned. Until
-  then, the <a href="code.html">code walkthrough</a> covers the same
-  ground in a more compact form.
-</p>
-
-<footer>
-  ArcaNet is released under the MIT license. Paper text © the author.
-  Contact: <a href="mailto:dr.rosyrosys@gmail.com">dr.rosyrosys@gmail.com</a>.
-</footer>
-
-</div>
-</body>
-</html>
+  grammar/voice-leading constraint layer, and a raw-byt
