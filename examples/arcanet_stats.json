@@ -1,0 +1,9 @@
+{
+  "compositions": 3,
+  "phrases_emitted": 19,
+  "distinct_phrases_used": 12,
+  "phrase_reuse_rate": 0.368,
+  "grammar_satisfaction_rate": 1.0,
+  "avg_voice_leading_semitones": 3.19,
+  "phrase_bank_size": 18
+}

@@ -1,0 +1,145 @@
+:root {
+  --bg: #faf7f2;
+  --fg: #1a1a1a;
+  --muted: #555;
+  --line: #d9d2c4;
+  --accent: #8a3c2b;
+  --accent-soft: #f1e3db;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --serif: Charter, "Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", "Book Antiqua", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--serif);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 28px 96px;
+}
+
+header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 32px;
+}
+header h1 {
+  font-size: 2.1rem;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+header .sub {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+}
+nav {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+nav a {
+  color: var(--accent);
+  text-decoration: none;
+  margin-right: 18px;
+}
+nav a:hover, nav a.active {
+  text-decoration: underline;
+}
+
+h2 {
+  margin-top: 44px;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+h3 {
+  margin-top: 28px;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+
+p { margin: 0 0 14px; }
+
+a { color: var(--accent); }
+
+code, pre {
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+pre {
+  background: #1f1b17;
+  color: #eee8dc;
+  padding: 16px 18px;
+  border-radius: 4px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+p code {
+  background: var(--accent-soft);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+.sample {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin: 18px 0;
+  background: #fff;
+}
+.sample h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.sample .meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: normal;
+}
+.sample audio {
+  width: 100%;
+  margin: 10px 0 4px;
+}
+.sample .links {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.sample .links a { margin-right: 14px; }
+
+.epigraph {
+  border-left: 3px solid var(--accent);
+  padding: 6px 16px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 22px 0 28px;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  margin-right: 6px;
+}
+
+footer {
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.88rem;
+}

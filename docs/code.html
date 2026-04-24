@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code walkthrough — ArcaNet</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>ArcaNet</h1>
+  <p class="sub">Code walkthrough — the phrase-level selector in six snippets.</p>
+  <nav>
+    <a href="index.html">Overview</a>
+    <a href="samples.html">Audio samples</a>
+    <a href="code.html" class="active">Code walkthrough</a>
+    <a href="https://github.com/your-github-username/arcanet">GitHub ↗</a>
+  </nav>
+</header>
+
+<p>
+  Full source: <a href="https://github.com/your-github-username/arcanet/blob/main/arcanet.py"><code>arcanet.py</code></a>
+  (~550 lines, standard library only). The snippets below show the
+  six load-bearing pieces; everything else is plumbing.
+</p>
+
+<h2>1. Phrase, the smallest compositional unit</h2>
+<p>
+  A phrase carries a chord, a harmonic function, a role, a density
+  score, explicit first- and last-pitches (for voice-leading
+  computation), and the list of note events. Every field is cheap to
+  inspect; the selector will feature-extract from them directly.
+</p>
+<pre><code>@dataclass(frozen=True)
+class Phrase:
+    pid:         str
+    chord:       str            # "I", "ii", "V", ...
+    function:    str            # "T", "PD", "D"
+    role:        str            # "opener", "answer", "middle", "close"
+    density:     float          # notes / beat
+    first_pitch: int
+    last_pitch:  int
+    notes:       tuple          # ((pitch, onset, dur, vel), ...)
+    total_beats: float</code></pre>
+
+<h2>2. A curated phrase bank</h2>
+<p>
+  The bank is explicit, small, and hand-readable — closer to Kircher's
+  rows of pre-composed fragments than to an opaque learned embedding.
+  Add phrases by appending literals; the selector adapts automatically.
+</p>
+<pre><code>BANK: list[Phrase] = [
+    Phrase("I_opener_01", "I", "T", "opener", 1.25, 60, 67,
+           notes=((60, 0.0, 1.0, 90), (64, 1.0, 1.0, 82),
+                  (67, 2.0, 2.0, 88)), total_beats=4.0),
+    Phrase("V_close_01", "V", "D", "close",   1.5,  71, 72,
+           notes=((67, 0.0, 0.5, 84), (71, 0.5, 0.5, 80),
+                  (74, 1.0, 1.0, 90), (72, 2.0, 2.0, 78)),
+           total_beats=4.0),
+    # ... ~30 more phrases covering all chords and roles ...
+]</code></pre>
+
+<h2>3. The neural-style selector</h2>
+<p>
+  A scoring function maps <em>(candidate, previous, role)</em> to a
+  scalar; a softmax with temperature turns those scores into a
+  distribution; we sample, and log the top three competitors for
+  replay and inspection.
+</p>
+<pre><code>def score(cand: Phrase, prev: Phrase | None, role: str) -> float:
+    s  = role_bias(cand.role, role)
+    s += density_preference(cand.density, role)
+    if prev is not None:
+        s -= 0.18 * abs(cand.first_pitch - prev.last_pitch)   # voice-lead
+        s += function_transition_bonus(prev.function, cand.function)
+    return s
+
+def select(prev, role, rng, temperature=0.9):
+    pool = [c for c in BANK if obeys_grammar(prev, c) and jump_ok(prev, c)]
+    logits = [score(c, prev, role) / temperature for c in pool]
+    probs  = softmax(logits)
+    pick   = rng.choices(pool, weights=probs, k=1)[0]
+    top3   = sorted(zip([c.pid for c in pool], probs), key=lambda x: -x[1])[:3]
+    return pick, top3</code></pre>
+
+<h2>4. The hard constraint layer</h2>
+<p>
+  Grammar and voice-leading are not soft preferences — they are
+  enforced by filtering the candidate pool before softmax. This is
+  the layer that makes bad moves impossible rather than merely
+  improbable.
+</p>
+<pre><code>def obeys_grammar(prev: Phrase | None, cand: Phrase) -> bool:
+    if prev is None:
+        return True
+    return cand.function in FUNCTION_TRANSITIONS[prev.function]
+
+def jump_ok(prev: Phrase | None, cand: Phrase, max_semitones: int = 5) -> bool:
+    if prev is None:
+        return True
+    return abs(cand.first_pitch - prev.last_pitch) <= max_semitones</code></pre>
+
+<h2>5. Form templates bias role distribution</h2>
+<p>
+  A form template is a sequence of slot roles. Plug in AABA,
+  antecedent-consequent, or a free chain; the selector does the rest.
+</p>
+<pre><code>FORMS = {
+    "AABA_16":   ["opener", "answer", "opener", "answer",
+                  "middle", "middle", "opener", "close"],
+    "sentence_8": ["opener", "opener", "middle", "close"],
+    "free_14":   ["opener"] + ["middle"] * 5 + ["close"],
+}</code></pre>
+
+<h2>6. Standard MIDI File output, no third-party library</h2>
+<p>
+  The MIDI writer is raw bytes: a header chunk, a tempo meta-event,
+  a 4/4 time signature, and delta-time-encoded note-on/note-off
+  events. ~40 lines total, no <code>mido</code>, no
+  <code>pretty_midi</code>.
+</p>
+<pre><code>def composition_to_midi(comp, path, tempo_bpm=92, ppq=480):
+    events = [(0, tempo_meta(tempo_bpm)), (0, time_sig_meta(4, 4))]
+    offset = 0.0
+    for ph in comp.phrases:
+        for (pitch, onset, dur, vel) in ph.notes:
+            on  = int(round((offset + onset)       * ppq))
+            off = int(round((offset + onset + dur) * ppq))
+            events.append((on,  bytes([0x90, pitch, vel])))
+            events.append((off, bytes([0x80, pitch, 0])))
+        offset += ph.total_beats
+    write_smf(path, events, ppq)</code></pre>
+
+<h2>Why this matters</h2>
+<p>
+  Every one of these snippets is six lines or fewer. A musician who
+  does not program for a living can still read every phrase in the
+  bank, every scoring term, every grammar transition. This is the
+  <em>whole point</em>: PLCA is not designed to outperform a large
+  language model on perplexity — it is designed to give composers an
+  inspectable, editable, and musically grounded generative system to
+  collaborate with.
+</p>
+
+<footer>
+  ArcaNet is released under the MIT license.
+</footer>
+
+</div>
+</body>
+</html>

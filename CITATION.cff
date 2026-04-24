@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "ArcaNet: A Reference Implementation of Phrase-Level Combinatorial AI"
+message: "If you use this software, please cite the accompanying paper."
+type: software
+authors:
+  - family-names: "Rosy"
+    given-names: "Rosy"
+    email: "dr.rosyrosys@gmail.com"
+version: "0.1.0"
+date-released: "2026-04-24"
+license: MIT
+repository-code: "https://github.com/your-github-username/arcanet"
+url: "https://your-github-username.github.io/arcanet/"
+preferred-citation:
+  type: article
+  title: "Phrase-Level Combinatorial Generation: A Historically Grounded Alternative to End-to-End Generative Music AI"
+  authors:
+    - family-names: "Rosy"
+      given-names: "Rosy"
+  journal: "Computer Music Journal"
+  year: 2026
+  note: "Under review."

@@ -1,0 +1,53 @@
+ArcaNet selection log
+========================================
+
+FORM: AABA_16
+BARS: 16
+PHRASES (8):
+  [00] pid=T_open_01      chord=I    fn=T   role=open  dens=0.75 first= 60 last= 67
+        top-3 candidates: [('T_open_04', 0.256), ('T_open_02', 0.253), ('T_open_03', 0.25)]
+  [01] pid=D_mid_01       chord=V    fn=D   role=mid   dens=0.75 first= 67 last= 67
+        top-3 candidates: [('D_mid_01', 0.168), ('D_mid_02', 0.127), ('PD_mid_01', 0.116)]
+  [02] pid=T_mid_01       chord=I    fn=T   role=mid   dens=0.75 first= 72 last= 67
+        top-3 candidates: [('D_mid_02', 0.273), ('D_mid_03', 0.245), ('T_mid_02', 0.241)]
+  [03] pid=cad_half_01    chord=V    fn=D   role=cad   dens=0.88 first= 65 last= 74
+        top-3 candidates: [('cad_auth_01', 0.527), ('cad_half_01', 0.291), ('cad_auth_02', 0.182)]
+  [04] pid=T_open_03      chord=I    fn=T   role=open  dens=0.75 first= 67 last= 72
+        top-3 candidates: [('T_open_03', 1.0)]
+  [05] pid=PD_mid_03      chord=IV   fn=PD  role=mid   dens=1.00 first= 72 last= 72
+        top-3 candidates: [('PD_mid_03', 0.232), ('D_mid_02', 0.225), ('D_mid_01', 0.153)]
+  [06] pid=D_mid_02       chord=V    fn=D   role=mid   dens=0.88 first= 71 last= 74
+        top-3 candidates: [('D_mid_02', 0.413), ('D_mid_01', 0.281), ('PD_mid_01', 0.194)]
+  [07] pid=T_final_02     chord=I    fn=T   role=final dens=0.75 first= 67 last= 60
+        top-3 candidates: [('T_final_02', 1.0)]
+
+FORM: sentence_8
+BARS: 8
+PHRASES (4):
+  [00] pid=T_open_04      chord=vi   fn=T   role=open  dens=0.75 first= 57 last= 64
+        top-3 candidates: [('T_open_04', 0.256), ('T_open_02', 0.253), ('T_open_03', 0.25)]
+  [01] pid=D_mid_01       chord=V    fn=D   role=mid   dens=0.75 first= 67 last= 67
+        top-3 candidates: [('D_mid_03', 0.151), ('D_mid_01', 0.135), ('PD_mid_01', 0.13)]
+  [02] pid=cad_half_01    chord=V    fn=D   role=cad   dens=0.88 first= 65 last= 74
+        top-3 candidates: [('cad_auth_01', 0.527), ('cad_half_01', 0.291), ('cad_auth_02', 0.182)]
+  [03] pid=T_final_02     chord=I    fn=T   role=final dens=0.75 first= 67 last= 60
+        top-3 candidates: [('T_final_02', 1.0)]
+
+FORM: free_14
+BARS: 14
+PHRASES (7):
+  [00] pid=T_open_04      chord=vi   fn=T   role=open  dens=0.75 first= 57 last= 64
+        top-3 candidates: [('T_open_04', 0.256), ('T_open_02', 0.253), ('T_open_03', 0.25)]
+  [01] pid=D_mid_01       chord=V    fn=D   role=mid   dens=0.75 first= 67 last= 67
+        top-3 candidates: [('D_mid_03', 0.151), ('D_mid_01', 0.135), ('PD_mid_01', 0.13)]
+  [02] pid=D_mid_02       chord=V    fn=D   role=mid   dens=0.88 first= 71 last= 74
+        top-3 candidates: [('D_mid_02', 0.273), ('D_mid_03', 0.245), ('T_mid_02', 0.241)]
+  [03] pid=cad_auth_02    chord=V    fn=D   role=cad   dens=0.88 first= 74 last= 67
+        top-3 candidates: [('cad_auth_02', 0.417), ('cad_auth_01', 0.376), ('cad_half_01', 0.207)]
+  [04] pid=T_open_01      chord=I    fn=T   role=open  dens=0.75 first= 60 last= 67
+        top-3 candidates: [('T_open_03', 0.476), ('T_open_02', 0.269), ('T_open_01', 0.256)]
+  [05] pid=T_mid_02       chord=vi   fn=T   role=mid   dens=0.75 first= 69 last= 65
+        top-3 candidates: [('D_mid_01', 0.168), ('D_mid_02', 0.127), ('PD_mid_01', 0.116)]
+  [06] pid=T_final_01     chord=I    fn=T   role=final dens=1.00 first= 64 last= 60
+        top-3 candidates: [('T_final_01', 0.521), ('T_final_02', 0.479)]
+

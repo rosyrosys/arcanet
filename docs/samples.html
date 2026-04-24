@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio samples — ArcaNet</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>ArcaNet</h1>
+  <p class="sub">Audio samples — produced deterministically from a single run.</p>
+  <nav>
+    <a href="index.html">Overview</a>
+    <a href="samples.html" class="active">Audio samples</a>
+    <a href="code.html">Code walkthrough</a>
+    <a href="https://github.com/your-github-username/arcanet">GitHub ↗</a>
+  </nav>
+</header>
+
+<p>
+  All three samples come from a single invocation of
+  <code>python arcanet.py</code> with seed <code>2026</code>. The MIDI
+  files are byte-identical across runs. The audio previews below were
+  rendered from those MIDI files with a minimal additive-synthesis
+  piano voice — pleasant enough for a preview, but nowhere near the
+  rendering you would get from a real piano soundfont in a DAW.
+</p>
+
+<div class="sample">
+  <h3>
+    Sample 1 — AABA_16
+    <span class="meta">16 bars · 52 note events</span>
+  </h3>
+  <p>
+    A standard pop-song period: two A-phrase statements, a contrasting
+    B section, a final A&prime;. The selector repeats specific
+    phrase identifiers at the A slots (phrase reuse is a feature, not
+    a bug) while the B section is drawn from a disjoint candidate
+    pool under pre-dominant / dominant functional constraints.
+  </p>
+  <audio controls preload="none" src="audio/arcanet_sample_01.mp3"></audio>
+  <div class="links">
+    <a href="audio/arcanet_sample_01.mp3" download>Download MP3</a>
+    <a href="https://github.com/your-github-username/arcanet/raw/main/examples/arcanet_sample_01.mid" download>Download MIDI</a>
+  </div>
+</div>
+
+<div class="sample">
+  <h3>
+    Sample 2 — sentence_8
+    <span class="meta">8 bars · 25 note events</span>
+  </h3>
+  <p>
+    A classical sentence: two-bar basic idea, its immediate repetition,
+    a two-bar continuation with increased rhythmic density, and a
+    two-bar half-cadence close. The constraint layer rejects
+    candidates whose first pitch jumps more than five semitones from
+    the previous phrase's last pitch, producing audibly stepwise
+    voice leading.
+  </p>
+  <audio controls preload="none" src="audio/arcanet_sample_02.mp3"></audio>
+  <div class="links">
+    <a href="audio/arcanet_sample_02.mp3" download>Download MP3</a>
+    <a href="https://github.com/your-github-username/arcanet/raw/main/examples/arcanet_sample_02.mid" download>Download MIDI</a>
+  </div>
+</div>
+
+<div class="sample">
+  <h3>
+    Sample 3 — free_14
+    <span class="meta">14 bars · 46 note events</span>
+  </h3>
+  <p>
+    No imposed form. A free chain of phrases selected only under the
+    functional grammar T → {T, PD, D} and the voice-leading window.
+    Useful for hearing what the raw selector prefers when no
+    form-template biases the phrase-role distribution.
+  </p>
+  <audio controls preload="none" src="audio/arcanet_sample_03.mp3"></audio>
+  <div class="links">
+    <a href="audio/arcanet_sample_03.mp3" download>Download MP3</a>
+    <a href="https://github.com/your-github-username/arcanet/raw/main/examples/arcanet_sample_03.mid" download>Download MIDI</a>
+  </div>
+</div>
+
+<h2>Selection traces</h2>
+<p>
+  Each sample above has a corresponding entry in
+  <a href="https://github.com/your-github-username/arcanet/blob/main/examples/arcanet_log.txt"><code>arcanet_log.txt</code></a>
+  listing, for every slot, the phrase identifier chosen, its chord,
+  its functional role (T / PD / D), its density, and the top three
+  candidates that were in contention. This is the artifact that
+  makes PLCA-style composition <em>inspectable</em>: a musician can
+  open the log, see that slot 4 was a coin-flip between two phrases,
+  and re-run with a different seed or swap the candidates by hand.
+</p>
+
+<footer>
+  ArcaNet is released under the MIT license.
+</footer>
+
+</div>
+</body>
+</html>
