@@ -15,8 +15,8 @@ preferred-citation:
   type: article
   title: "Phrase-Level Combinatorial Generation: A Historically Grounded Alternative to End-to-End Generative Music AI"
   authors:
-    - family-names: "Rosy"
-      given-names: "Rosy"
-  journal: "Computer Music Journal"
+    - family-names: "Park"
+      given-names: "Eun Ji"
   year: 2026
-  note: "Under review."
+  doi: "10.5281/zenodo.19726871"
+  notes: "Preprint, under peer review."
