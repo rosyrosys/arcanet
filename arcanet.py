@@ -5,8 +5,8 @@ ArcaNet: A Phrase-Level Combinatorial Engine for Algorithmic Composition
 A minimal, dependency-free reference implementation of the Phrase-Level
 Combinatorial AI (PLCA) methodology proposed in:
 
-    "Phrase-Level Combinatorial Generation: A Historically Grounded
-     Alternative to End-to-End Generative Music AI" (Computer Music
+    "Phrase-Level Combinatorial AI: A Transparent Alternative to
+     End-to-End Neural Music Generation" (Computer Music
      Journal, submitted 2026).
 
 The system is a direct descendant of Athanasius Kircher's Arca
@@ -28,7 +28,7 @@ Run:
 Output:
     output/arcanet_sample_01.mid   (16-bar A-A'-B-A' form)
     output/arcanet_sample_02.mid   (8-bar antecedent-consequent)
-    output/arcanet_sample_03.mid   (12-bar free combination)
+    output/arcanet_sample_03.mid   (14-bar free combination)
     output/arcanet_log.txt         (selection trace for each sample)
     output/arcanet_stats.json      (phrase-reuse, constraint-hit rates)
 """
